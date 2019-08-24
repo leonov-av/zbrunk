@@ -1,6 +1,12 @@
 = Generating a self-signed certificate using OpenSSL =
 openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
 
+= Installation requirements =
+pip3 install -r requirements.txt
+
+= Run server =
+python3 web/collector.py
+
 = Testing =
 $ curl -k https://127.0.0.1:8088/
 Hello, it's Zbrunk!
