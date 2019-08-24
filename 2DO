@@ -1,15 +1,6 @@
-# For testing:
-# $ curl http://127.0.0.1:5000/
-# Hello, Zbrunk!
-
-# Request to process:
-# $ echo -e '{"time":"1471613579", "host":"test_host", "event":{"test_key":"test_line1"}}\n{"time":"1471613580", "host":"test_host", "event":{"test_key":"test_line2"}}' > temp.json
-# $ curl -k https://your_zbrunk_host:8088/services/collector -H 'Authorization: Zbrunk 8DEE8A67-7700-4BA7-8CBF-4B917CE2352B' -d @temp.json
-# {"text":"Success","code":0}
-
-# 1. Change port to 8088 in collector
-# 2. Configure https
-# 3. Get POST requests to https://your_zbrunk_host:8088/services/collector, print headers and data
-# 4. Validate that data is valid JSON
-# 5. Check mandatory fields
-# 6. Put data in Mongo
+1. Change port to 8088 in collector [Done]
+2. Configure https [Done]
+3. Get POST requests to https://your_zbrunk_host:8088/services/collector, print headers and data
+4. Validate that data is valid JSON
+5. Check mandatory fields
+6. Put data in Mongo
