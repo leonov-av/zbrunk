@@ -1,6 +1,6 @@
 1. Change port to 8088 in collector [Done]
 2. Configure https [Done]
-3. Get POST requests to https://your_zbrunk_host:8088/services/collector, print headers and data
+3. Get POST requests to https://your_zbrunk_host:8088/services/collector, print headers and data [Done]
 4. Validate that data is valid JSON
 5. Check mandatory fields
 6. Put data in Mongo
