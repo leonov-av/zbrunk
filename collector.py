@@ -12,6 +12,6 @@ def index():
     return "Hello, it's Zbrunk!"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='127.0.0.1', port=8088, ssl_context=('cert/certificate.pem', 'cert/key.pem'), debug=True)
 
 
