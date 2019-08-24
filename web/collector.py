@@ -8,7 +8,7 @@ from flask import Flask, request
 import json
 import re
 
-auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE2352B": {"index": "test_index"}}
+auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE2352B": {"event_type": "test_event"}}
 
 app = Flask(__name__)
 
@@ -24,9 +24,9 @@ def collect():
         headers = request.headers
 
         auth_token = ""
-        index = ""
+        event_type = ""
 
-        # Checking the authentication token and get the corresponding index name
+        # Checking the authentication token and get the corresponding event_type name
         auth_header = headers.get('Authorization').split(" ")
         if len(auth_header) > 1:
             auth_token = auth_header[1]
@@ -36,7 +36,7 @@ def collect():
             code = 2
             status_ok = False
         else:
-            index = auth_tokens[auth_token]['index']
+            event_type = auth_tokens[auth_token]['event_type']
 
         # Dealing with the data
         # It's not clear why, but there is no "\n" in Post request data
@@ -53,10 +53,10 @@ def collect():
             code = 3
             status_ok = False
 
-        # Adding index to the events
+        # Adding event_type to the events
         new_events = list()
         for event in events:
-            event['index'] = index
+            event['event_type'] = event_type
             new_events.append(event)
         events = new_events
 
