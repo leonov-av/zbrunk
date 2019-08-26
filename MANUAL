@@ -4,7 +4,22 @@ openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certifi
 = Installation requirements =
 pip3 install -r requirements.txt
 
-= Run server =
+== Install Mongo in Ubuntu 18.04 ==
+sudo apt-get update
+sudo apt-get install mongodb
+sudo service mongodb start
+cat /var/log/mongodb/mongodb.log   | grep "waiting for"
+
+== Configure Mongo ==
+mongo # Run console
+use zbrunk
+db.createCollection(name="events")
+db.createUser({user:"zbrunk_system", pwd: "s3curep4zzw0rd", roles:["readWrite"]})
+
+This command should work: `mongo --username "zbrunk_system" --password "s3curep4zzw0rd" zbrunk`
+Useful command to delete user: `db.dropUser(username="zbrunk_system")`
+
+= Run Zbrunk server =
 python3 web/collector.py
 
 = Testing =
@@ -12,8 +27,8 @@ $ curl -k https://127.0.0.1:8088/
 Hello, it's Zbrunk!
 
 Request to process:
-$ echo -e '{"time":"1471613579", "host":"test_host", "event":{"test_key":"test_line1"}}\n{"time":"1471613580", "host":"test_host", "event":{"test_key":"test_line2"}}' > temp.json
-$ curl -k https://127.0.0.1:8088/services/collector -H 'Authorization: Zbrunk 8DEE8A67-7700-4BA7-8CBF-4B917CE2352B' -d @temp.json
+$ echo -e '{"time":"1471613579", "host":"test_host", "event":{"test_key":"test_line1"}}\n{"time":"1471613580", "host":"test_host", "event":{"test_key":"test_line2"}}' > temp_data
+$ curl -k https://127.0.0.1:8088/services/collector -H 'Authorization: Zbrunk 8DEE8A67-7700-4BA7-8CBF-4B917CE2352B' -d @temp_data
 {"text":"Success","code":0}
 
 Server output:

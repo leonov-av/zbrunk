@@ -7,14 +7,29 @@
 from flask import Flask, request
 import json
 import re
+import pymongo
 
+import pymongo
+
+# MongoDB Connection
+mongo_client = pymongo.MongoClient("mongodb://127.0.0.1:27017/zbrunk",
+                                   username="zbrunk_system",
+                                   password="s3curep4zzw0rd")
+zbrunk_db = mongo_client["zbrunk"]
+events_collection = zbrunk_db["events"]
+
+# Authentication tokens for Zbrunk collector
 auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE2352B": {"event_type": "test_event"}}
 
+
+# Zbrunk collector service
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
     return "Hello, it's Zbrunk!"
+
 
 @app.route('/services/collector', methods=['POST'])
 def collect():
@@ -85,12 +100,11 @@ def collect():
         # Sending events to Mongo
         if status_ok:
             for event in events:
-                print(event)
+                events_collection.insert_one(event)
 
         if status_ok:
             text = "Success"
             code = 0
-
 
         return json.dumps({"text": text, "code": code})
 
