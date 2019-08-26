@@ -8,23 +8,9 @@ from flask import Flask, request
 import json
 import re
 import pymongo
-
-import pymongo
+from run import config, app, zbrunk_db, events_collection, auth_tokens
 
 # MongoDB Connection
-mongo_client = pymongo.MongoClient("mongodb://127.0.0.1:27017/zbrunk",
-                                   username="zbrunk_system",
-                                   password="s3curep4zzw0rd")
-zbrunk_db = mongo_client["zbrunk"]
-events_collection = zbrunk_db["events"]
-
-# Authentication tokens for Zbrunk collector
-auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE2352B": {"event_type": "test_event"}}
-
-
-# Zbrunk collector service
-app = Flask(__name__)
-
 
 @app.route('/')
 def index():
@@ -107,10 +93,5 @@ def collect():
             code = 0
 
         return json.dumps({"text": text, "code": code})
-
-
-
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8088, ssl_context=('cert/certificate.pem', 'cert/key.pem'), debug=True)
 
 
