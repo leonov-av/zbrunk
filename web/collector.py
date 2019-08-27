@@ -2,15 +2,12 @@
 
 # We need here a flask-based service that will get events from user and put them in Mongodb
 
-# pip3 install flask
-
 from flask import Flask, request
 import json
 import re
 import pymongo
-from run import config, app, zbrunk_db, events_collection, auth_tokens
+from run import config, app, zbrunk_db, events_collection, collector_auth_tokens
 
-# MongoDB Connection
 
 @app.route('/')
 def index():
@@ -37,7 +34,7 @@ def collect():
             code = 2
             status_ok = False
         else:
-            event_type = auth_tokens[auth_token]['event_type']
+            event_type = collector_auth_tokens[auth_token]['event_type']
 
         # Dealing with the data
         # It's not clear why, but there is no "\n" in Post request data
