@@ -20,7 +20,7 @@ This command should work: `mongo --username "zbrunk_system" --password "s3curep4
 Useful command to delete user: `db.dropUser(username="zbrunk_system")`
 
 = Run Zbrunk server =
-python3 web/collector.py
+python3 web/run.py
 
 = Testing =
 $ curl -k https://127.0.0.1:8088/
