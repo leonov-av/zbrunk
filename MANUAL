@@ -10,6 +10,15 @@ sudo apt-get install mongodb
 sudo service mongodb start
 cat /var/log/mongodb/mongodb.log   | grep "waiting for"
 
+== Install Mongo in Ubuntu 16.04 ==
+
+wget https://repo.mongodb.org/apt/ubuntu/dists/xenial/mongodb-org/4.2/multiverse/binary-amd64/mongodb-org-server_4.2.0_amd64.deb
+wget https://repo.mongodb.org/apt/ubuntu/dists/xenial/mongodb-org/4.2/multiverse/binary-amd64/mongodb-org-shell_4.2.0_amd64.deb
+dpkg -i mongodb-org-server_4.2.0_amd64.deb
+dpkg -i mongodb-org-shell_4.2.0_amd64.deb
+sudo service mongodb start
+cat /var/log/mongodb/mongodb.log   | grep "waiting for"
+
 == Configure Mongo ==
 mongo # Run console
 use zbrunk
