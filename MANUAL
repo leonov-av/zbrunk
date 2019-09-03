@@ -26,7 +26,9 @@ db.createCollection(name="events")
 db.createUser({user:"zbrunk_system", pwd: "s3curep4zzw0rd", roles:["readWrite"]})
 
 This command should work: `mongo --username "zbrunk_system" --password "s3curep4zzw0rd" zbrunk`
-Useful command to delete user: `db.dropUser(username="zbrunk_system")`
+Useful commands
+    to delete user: `db.dropUser(username="zbrunk_system")`
+    to delete all entries in the collection: `db.events.remove({})`
 
 = Run Zbrunk server =
 sudo service mongodb start
@@ -36,15 +38,13 @@ python3 web/run.py
 $ curl -k https://127.0.0.1:8088/
 Hello, it's Zbrunk!
 
-Request to collector:
+Sending events to collector:
 $ echo -e '{"time":"1471613579", "host":"test_host", "event":{"test_key":"test_line1"}}\n{"time":"1471613580", "host":"test_host", "event":{"test_key":"test_line2"}}' > temp_data
 $ curl -k https://127.0.0.1:8088/services/collector -H 'Authorization: Zbrunk 8DEE8A67-7700-4BA7-8CBF-4B917CE2352B' \
 -d @temp_data
 {"text":"Success","code":0}
 
-Server output:
-ImmutableMultiDict([('{"time":"1471613579", "host":"test_host", "event":{"test_key":"test_line1"}}{"time":"1471613580", "host":"test_host", "event":{"test_key":"test_line2"}}', '')])
-
-Request to search:
-curl -k https://127.0.0.1:8088/services/searcher \
--d '{"search": "query", "output_mode": "json", "max_count":"10000000", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
+Getting events with searcher:
+$ curl -k https://127.0.0.1:8088/services/searcher \
+-d '{"search": {"event_type": "test_event", "time":{"from":1471613579,"to":1471613580}}, "output_mode": "json", "max_count":"10000000", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
+{"results": [{"_id": "5d6eeed53631f82594d80659", "time": 1471613579, "host": "test_host", "event": {"test_key": "test_line1"}, "event_type": "test_event"}, {"_id": "5d6eeed53631f82594d8065a", "time": 1471613580, "host": "test_host", "event": {"test_key": "test_line2"}, "event_type": "test_event"}], "text": "Success", "code": 0}

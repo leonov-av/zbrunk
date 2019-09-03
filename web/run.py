@@ -23,7 +23,7 @@ collector_auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE2352B": {"event_type": 
 searcher_auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE23512": {"user_name": "test_user", "permissions": ['read']}}
 
 
-# from collector import *
+from collector import *
 from searcher import *
 
 if __name__ == '__main__':

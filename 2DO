@@ -4,5 +4,5 @@
 4. Validate that data is valid JSON [Done]
 5. Check mandatory fields [Done]
 6. Put data in Mongo [Done]
-7. API for Search requests
+7. API for Search requests [Done]
 8. Dashboard maker, panel "Amount of events in the base today", "Statistics for event types"

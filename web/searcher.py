@@ -38,6 +38,15 @@ def search():
 
         if status_ok == True:
             text = "Success"
+            events = search_params['search']
             code = 0
+            results = list()
+            for event in events_collection.find({"$and": [
+                    {"event_type": {"$eq": search_params['search']["event_type"]}},
+                    {"time": {"$gte": search_params['search']["time"]["from"]}},
+                    {"time": {"$lte": search_params['search']["time"]["to"]}}
+            ]}):
+                event['_id'] = str(event['_id'])
+                results.append(event)
 
-        return json.dumps({'results': events, 'text':text, 'code':code})
+        return json.dumps({'results': results, 'text':text, 'code':code})

@@ -29,7 +29,7 @@ def collect():
         if len(auth_header) > 1:
             auth_token = auth_header[1]
 
-        if not auth_token in auth_tokens:
+        if not auth_token in collector_auth_tokens:
             text = "Authentication Error"  # check codes and messages!
             code = 2
             status_ok = False
@@ -66,7 +66,7 @@ def collect():
                 status_ok = False
             else:
                 try:
-                    time = int(event['time'])
+                    event['time'] = int(event['time'])
                 except:
                     text = "Wrong value of time parameter"  # check codes and messages!
                     code = 3
