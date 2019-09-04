@@ -90,5 +90,3 @@ def collect():
             code = 0
 
         return json.dumps({"text": text, "code": code})
-
-

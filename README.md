@@ -11,19 +11,14 @@ Why is it necessary? Well, I've worked a lot with Splunk in recent years. I like
 
 We are realistic, the performance and search capabilities of Zbrunk will be MUCH worse. It's impossible to make such universal and effective solution as a pet project without any resources. So, don't expect something that will process terabytes of logs in near real time, the goal is completely different. But if you want same basic tool to make dashboards, it worth a try. 🙂
 
-Now, after first weekend of coding and planning it's possible to send events to Zbrunk just like you do it using the Splunk HTTP Event Collector and they appear in MongoDB:
+Now, after first weekend of coding and planning it's possible to:
 
-`$ echo -e '{"time":"1471613579", "host":"test_host", "event":{"test_key":"test_line1"}}\n{"time":"1471613580", "host":"test_host", "event":{"test_key":"test_line2"}}' > temp_data`
+1) Send events to Zbrunk just like you do it using the Splunk HTTP Event Collector. Thus, it will be very easy to use your existing custom connectors if you already have some.
+2) Search for events by type and time range.
+3) Delete events by type and time range.
 
-`$ curl -k https://127.0.0.1:8088/services/collector -H 'Authorization: Zbrunk 8DEE8A67-7700-4BA7-8CBF-4B917CE2352B' -d @temp_data
-{"text": "Success", "code": 0}`
+See the examples in "MANUAL -> Test cases"
 
-In Mongo:
+The next step is to prepare dashboard data using the search requests and somehow show these dashboards, for example, in Grafana.
 
-`> db.events.find()`
-
-`{ "_id" : ObjectId("5d62d7061600085d80bb1ea8"), "time" : "1471613579", "host" : "test_host", "event" : { "test_key" : "test_line1" }, "event_type" : "test_event" }`
-
-`{ "_id" : ObjectId("5d62d7061600085d80bb1ea9"), "time" : "1471613580", "host" : "test_host", "event" : { "test_key" : "test_line2" }, "event_type" : "test_event" }`
-
-Thus, it will be very easy to use your existing custom connectors if you already have some. The next step is to make basic http search API, prepare dashboard data using these search requests and somehow show these dashboards, for example, in Grafana. Stay tuned and welcome to participate. 😉
+Stay tuned and welcome to participate. 😉
