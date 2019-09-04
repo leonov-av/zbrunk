@@ -71,4 +71,4 @@ def search():
                     event['_id'] = str(event['_id'])
                     results.append(event)
 
-        return json.dumps({'results': results, 'text':text, 'code':code})
+        return json.dumps({'results': results, 'text':text, 'code':code}) + "\n"

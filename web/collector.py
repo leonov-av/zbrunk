@@ -89,4 +89,4 @@ def collect():
             text = "Success"
             code = 0
 
-        return json.dumps({"text": text, "code": code})
+        return json.dumps({"text": text, "code": code}) + "\n"
