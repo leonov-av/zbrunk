@@ -7,7 +7,10 @@ import pymongo
 configfile = 'zbrunk.conf'
 config = ConfigObj(configfile)
 
-app = Flask(__name__)
+app = Flask(__name__,
+			static_url_path='',
+            static_folder='static',
+            template_folder='templates')
 
 # MongoDB Connection
 mongo_client = pymongo.MongoClient(config['DATABASE']['database'],

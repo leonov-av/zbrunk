@@ -3,37 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Operation executer</title>
+    <script src="/js/vue.js"></script>
+
 </head>
 <body>
-<p>Operation: <textarea id="operation_text" cols="40" rows="5"></textarea></p>
-<p><button id="executeButton" type="button">Execute!</button></p>
+    <div id="example-3">
+        <p>Operation: <textarea id="operation_text" cols="40" rows="5" v-model="operation_text"></textarea></p>
+        <p><button id="executeButton" type="button" v-on:click="say('hi')">Execute!</button></p>
+    </div>
 </body>
 
-<script>
-function httpPost(theUrl, theValue)
-{
-    var xhr = new XMLHttpRequest();
-    var url = theUrl;
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.parse(xhr.responseText);
-            console.log(json.email + ", " + json.password);
-        }
-    };
-    var data = theValue;
-    xhr.send(data);
-}
-
-var message = document.getElementById("operation_text");
-var el = document.getElementById("executeButton");
-if(el){
-    el.addEventListener("click", function() {
-        operation = message.value;
-        theUrl = window.location.href + "services/searcher";
-        httpPost(theUrl, operation);
-    });
-}
-</script>
+<script src="/js/vue_operation.js"></script>
+<!--script src="/js/operation.js"></script-->
 </html>
