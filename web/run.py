@@ -23,9 +23,9 @@ collector_auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE2352B": {"event_type": 
 searcher_auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE23512": {"user_name": "test_user",
 																 "permissions": ['read','delete']}}
 
-
 from collector import *
 from searcher import *
+from gui import *
 
 if __name__ == '__main__':
     app.run(host=config['WEB']['host'], 
