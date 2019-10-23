@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <title>Operation executer</title>
     <script src="/js/vue.js"></script>
+    <!--script src="https://unpkg.com/axios/dist/axios.min.js"></script--->
+    <script src="/js/axios.min.js"></script>
 
 </head>
 <body>
     <div id="example-3">
         <p>Operation: <textarea id="operation_text" cols="40" rows="5" v-model="operation_text"></textarea></p>
         <p><button id="executeButton" type="button" v-on:click="say('hi')">Execute!</button></p>
+        <p>Results: <textarea v-model="results"></textarea></p>
     </div>
 </body>
 
