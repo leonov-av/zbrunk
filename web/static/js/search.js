@@ -1,7 +1,8 @@
 function process_search_results(search_results){
     var i;
     var text;
-    text = "<ol>"
+    text = "<i>" + search_results['results_count'] + " of " + search_results['all_results_count'] + "</i>"
+    text += "<ol>"
     for (i = 0; i < search_results['results'].length; i++) {
       text += "<li><code class='json'>" + JSON.stringify(search_results['results'][i]) + "</code></li>";
     }

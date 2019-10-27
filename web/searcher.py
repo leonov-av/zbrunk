@@ -11,9 +11,12 @@ def search():
     if request.method == 'POST':
         status_ok = True
         results = list()
+        results_count = 0
+        all_results_count = 0
         data_string = list(request.form)[0]
         print(data_string)
         events = list()
+
 
         # Example:
         #curl -k https://127.0.0.1:8088/services/searcher \
@@ -63,12 +66,22 @@ def search():
                     {"time": {"$lte": int(search_params['search']["time"]["to"])}}
             ]}
 
+            # Defaults
+            if not "max_count" in search_params:
+                search_params['max_count'] = "100000"
+            if not "skip" in search_params:
+                search_params['skip'] = "0"
+
             if search_delete:
                 events_collection.remove(search_request)
                 text = "Events deleted"
             else:
-                for event in events_collection.find(search_request):
+                search_results = events_collection.find(search_request).skip(int(search_params['skip'])).limit(int(search_params['max_count']))
+                all_results_count = search_results.count()
+                for event in search_results:
                     event['_id'] = str(event['_id'])
                     results.append(event)
+                results_count = len(results)
 
-        return json.dumps({'results': results, 'text':text, 'code':code}) + "\n"
+        return json.dumps({'results': results, 'results_count':results_count,
+                           'all_results_count':all_results_count, 'text':text, 'code':code}) + "\n"

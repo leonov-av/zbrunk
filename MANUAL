@@ -44,9 +44,9 @@ Hello, it's Zbrunk!
 
 2) Searching for test_event in the time range [1471613579;1471613580] with searcher:
 
-$ curl -k https://127.0.0.1:8088/services/searcher -d '{"search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
+$ curl -k https://127.0.0.1:8088/services/searcher -d '{"search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "skip":"0", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
 
-{"results": [], "text": "Success", "code": 0}
+{"results": [], "results_count": 0, "all_results_count": 0, "text": "Success", "code": 0}
 
 There are no such events!
 
@@ -58,21 +58,22 @@ $ echo -e '{"time":"1471613579", "host":"test_host", "event":{"test_key":"test_l
 
 4) Searching for test_event in the time range [1471613579;1471613580] with searcher:
 
-curl -k https://127.0.0.1:8088/services/searcher -d '{"search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
+curl -k https://127.0.0.1:8088/services/searcher -d '{"search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "skip":"0", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
 
-{"results": [{"_id": "5d6fa0be6160c5a666099ad8", "time": 1471613579, "host": "test_host", "event": {"test_key": "test_line1"}, "event_type": "test_event"}, {"_id": "5d6fa0be6160c5a666099ad9", "time": 1471613580, "host": "test_host", "event": {"test_key": "test_line2"}, "event_type": "test_event"}], "text": "Success", "code": 0}
+{"results": [{"_id": "5db58f1a17fc95de66188c0f", "time": 1471613579, "host": "test_host", "event": {"test_key": "test_line1"}, "event_type": "test_event"}, {"_id": "5db58f1a17fc95de66188c10", "time": 1471613580, "host": "test_host", "event": {"test_key": "test_line2"}, "event_type": "test_event"}], "results_count": 2, "all_results_count": 2, "text": "Success", "code": 0}
 
 There are some events!
 
 5) Deleting test_event in the time range [1471613579;1471613580] with searcher:
 
-curl -k https://127.0.0.1:8088/services/searcher -d '{"delete":"True", "search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
+$ curl -k https://127.0.0.1:8088/services/searcher -d '{"delete":"True", "search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
 
-{"results": [], "text": "Events deleted", "code": 0}
+{"results": [], "results_count": 0, "all_results_count": 0, "text": "Events deleted", "code": 0}
 
 6) Searching for test_event in the time range [1471613579;1471613580] with searcher:
 
-curl -k https://127.0.0.1:8088/services/searcher -d '{"search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
-{"results": [], "text": "Success", "code": 0}
+$ curl -k https://127.0.0.1:8088/services/searcher -d '{"search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "skip":"0", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
+
+{"results": [], "results_count": 0, "all_results_count": 0, "text": "Success", "code": 0}
 
 There are no such events! They were successfully deleted!
