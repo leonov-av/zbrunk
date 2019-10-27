@@ -7,7 +7,19 @@ import pymongo
 configfile = 'zbrunk.conf'
 config = ConfigObj(configfile)
 
-app = Flask(__name__,
+
+# If you are using Jinja2 to render your templates, you will need to add a few lines of code
+# to tell Jinja2 to not use the {{ }} syntax to render variables, because we need those
+# double-curly-brace symbols for Vue.js.
+# https://stackoverflow.com/questions/46214132/how-can-i-combine-vue-js-with-flask
+class CustomFlask(Flask):
+    jinja_options = Flask.jinja_options.copy()
+    jinja_options.update(dict(
+        variable_start_string='%%',  # Default is '{{', I'm changing this because Vue.js uses '{{' / '}}'
+        variable_end_string='%%',
+    ))
+
+app = CustomFlask(__name__,
 			static_url_path='',
             static_folder='static',
             template_folder='templates')

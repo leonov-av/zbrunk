@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -92,5 +92,29 @@
          x="31.25312"
          y="154.98155"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Dubai;-inkscape-font-specification:Dubai;fill:#ff0000;stroke-width:0.26458332;fill-opacity:1;">zbrunk</tspan></text>
+    <rect
+       style="fill:#ff0000;fill-opacity:1;stroke-width:0.20159909"
+       id="rect3732-4"
+       width="57.462948"
+       height="19.163225"
+       x="55.458424"
+       y="96.400864"
+       inkscape:export-xdpi="92.825035"
+       inkscape:export-ydpi="92.825035"
+       inkscape:export-filename="C:\Users\Alexander\Desktop\text3715-3-4.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="68.483772"
+       y="109.18795"
+       id="text3715-3-4"
+       inkscape:export-xdpi="92.825035"
+       inkscape:export-ydpi="92.825035"
+       inkscape:export-filename="C:\Users\Alexander\Desktop\text3715-3-4.png"><tspan
+         sodipodi:role="line"
+         id="tspan3713-1-8"
+         x="68.483772"
+         y="109.18795"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Dubai;-inkscape-font-specification:Dubai;fill:#ffffff;stroke-width:0.26458332">zbrunk</tspan></text>
   </g>
 </svg>
