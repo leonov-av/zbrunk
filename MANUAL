@@ -64,13 +64,19 @@ curl -k https://127.0.0.1:8088/services/searcher -d '{"search": {"event_type": "
 
 There are some events!
 
-5) Deleting test_event in the time range [1471613579;1471613580] with searcher:
+5) Searching for types of events in [1471613579;1471613580] with searcher:
+
+$ curl -k https://127.0.0.1:8088/services/searcher -d '{"get_types":"True", "search": {"time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
+
+{"results": ["test_event"], "results_count": 1, "all_results_count": 0, "text": "Types found", "code": 0}
+
+6) Deleting test_event in the time range [1471613579;1471613580] with searcher:
 
 $ curl -k https://127.0.0.1:8088/services/searcher -d '{"delete":"True", "search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
 
 {"results": [], "results_count": 0, "all_results_count": 0, "text": "Events deleted", "code": 0}
 
-6) Searching for test_event in the time range [1471613579;1471613580] with searcher:
+7) Searching for test_event in the time range [1471613579;1471613580] with searcher:
 
 $ curl -k https://127.0.0.1:8088/services/searcher -d '{"search": {"event_type": "test_event", "time":{"from":"1471613579","to":"1471613580"}}, "output_mode": "json", "max_count":"10000000", "skip":"0", "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
 
