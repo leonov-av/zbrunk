@@ -36,20 +36,29 @@ def collect():
         else:
             event_type = collector_auth_tokens[auth_token]['event_type']
 
-        # Dealing with the data
-        # It's not clear why, but there is no "\n" in Post request data
-        # So I make a dirty hack to present this string as a list of dicts
-        data_string = list(request.form)[0]
-        data_string = re.sub("}[ \t]*{", "},{", data_string)
-        data_string = re.sub("^", "[", data_string)
-        data_string = re.sub("$", "]", data_string)
-        try:
-            events = json.loads(data_string)
-        except:
-            events = list()
-            text = "Data parsing failure"  # check codes and messages!
-            code = 3
-            status_ok = False
+        if request.json:
+            try:
+                events = request.json['events']
+            except:
+                events = list()
+                text = "Data parsing failure"  # check codes and messages!
+                code = 3
+                status_ok = False
+        elif request.form:
+            # Dealing with the data
+            # It's not clear why, but there is no "\n" in Post request data
+            # So I make a dirty hack to present this string as a list of dicts
+            data_string = list(request.form)[0]
+            data_string = re.sub("}[ \t]*{", "},{", data_string)
+            data_string = re.sub("^", "[", data_string)
+            data_string = re.sub("$", "]", data_string)
+            try:
+                events = json.loads(data_string)
+            except:
+                events = list()
+                text = "Data parsing failure"  # check codes and messages!
+                code = 3
+                status_ok = False
 
         # Adding event_type to the events
         new_events = list()

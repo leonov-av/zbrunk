@@ -13,8 +13,6 @@ def search():
         results = list()
         results_count = 0
         all_results_count = 0
-        data_string = list(request.form)[0]
-        print(data_string)
         events = list()
 
         # Example:
@@ -22,13 +20,23 @@ def search():
         # -d '{"search": "query", "output_mode": "json", "max_count":"10000000",
         #               "auth_token":"8DEE8A67-7700-4BA7-8CBF-4B917CE23512"}'
 
-        search_params = dict()
-        try:
-            search_params = json.loads(data_string)
-        except:
-            text = "Data parsing failure"
-            code = 3
-            status_ok = False
+        if request.json:
+            try:
+                search_params = request.json
+            except:
+                text = "Data parsing failure"
+                code = 3
+                status_ok = False
+        elif request.form:
+            search_params = dict()
+            data_string = list(request.form)[0]
+            print(data_string)
+            try:
+                search_params = json.loads(data_string)
+            except:
+                text = "Data parsing failure"
+                code = 3
+                status_ok = False
 
         auth_token = ""
         if search_params != dict():
