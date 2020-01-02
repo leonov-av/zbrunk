@@ -33,7 +33,9 @@ zbrunk_db = mongo_client["zbrunk"]
 events_collection = zbrunk_db["events"]
 
 # Authentication tokens for Zbrunk collector
-collector_auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE2352B": {"event_type": "test_event"}}
+collector_auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE2352B": {"event_type": "test_event"},
+                         "8DEE8A67-7700-4BA7-8CBF-4B917CE23441": {}}
+
 # Authentication tokens for Zbrunk searcher
 searcher_auth_tokens = {"8DEE8A67-7700-4BA7-8CBF-4B917CE23512": {"user_name": "test_user",
 																 "permissions": ['read','delete']}}

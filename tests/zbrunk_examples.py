@@ -18,7 +18,7 @@ def get_ts(time_line):
     # - N days ago
     # - Beginning of Time
     # - End of Time
-
+    #
     # API will work only with timestamps
 
     ts = "Error"
@@ -106,9 +106,9 @@ print(time_line + " - " + get_ts(time_line))
 
 ## Send events
 events = list()
-events.append({"time": get_ts("Current"), "host": "test_host", "event": {"test_key": "test_line1"}})
-events.append({"time": get_ts("Current"), "host": "test_host", "event": {"test_key": "test_line2"}})
-collector_token = '8DEE8A67-7700-4BA7-8CBF-4B917CE2352B'
+events.append({"time": get_ts("Current"), "event_type": "test_event", "host": "test_host", "event": {"test_key": "test_line1"}})
+events.append({"time": get_ts("Current"), "event_type": "test_event", "host": "test_host", "event": {"test_key": "test_line2"}})
+collector_token = '8DEE8A67-7700-4BA7-8CBF-4B917CE23441'
 print("Sending Events")
 print("Results: " + str(send_to_collector(server=server, events=events, collector_token=collector_token)))
 # Sending Events

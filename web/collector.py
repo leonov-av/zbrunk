@@ -34,7 +34,12 @@ def collect():
             code = 2
             status_ok = False
         else:
-            event_type = collector_auth_tokens[auth_token]['event_type']
+            if 'event_type' in collector_auth_tokens[auth_token]:
+                event_type = collector_auth_tokens[auth_token]['event_type'] # event_type is set in auth_token
+            else:
+                event_type = "" # event_type will be set in events
+
+
 
         if request.json:
             try:
@@ -63,7 +68,18 @@ def collect():
         # Adding event_type to the events
         new_events = list()
         for event in events:
-            event['event_type'] = event_type
+            if event_type == "": # event_type from auth_token
+                if 'event_type' in event: # event_type from the event
+                    if event['event_type'] == "":
+                        text = "No event_type set"
+                        code = 3
+                        status_ok = False
+                else:
+                    text = "No event_type set"
+                    code = 3
+                    status_ok = False
+            else:
+                event['event_type'] = event_type
             new_events.append(event)
         events = new_events
 
