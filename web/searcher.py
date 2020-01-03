@@ -104,7 +104,7 @@ def search():
                 results_count = len(results)
                 text = "Types found"
             else:
-                search_results = events_collection.find(search_request).skip(int(search_params['skip'])).limit(int(search_params['max_count']))
+                search_results = events_collection.find(search_request).sort( [("time", pymongo.DESCENDING)] ).skip(int(search_params['skip'])).limit(int(search_params['max_count']))
                 all_results_count = search_results.count()
                 for event in search_results:
                     event['_id'] = str(event['_id'])
