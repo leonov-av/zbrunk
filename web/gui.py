@@ -10,3 +10,7 @@ from run import config, app, zbrunk_db, events_collection, searcher_auth_tokens
 @app.route('/', methods=['GET'])
 def gui():
       return render_template('index.html')
+
+@app.route('/testdash', methods=['GET'])
+def testdash():
+      return render_template('testdash.html')
